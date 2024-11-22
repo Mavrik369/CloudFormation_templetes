@@ -1,0 +1,25 @@
+Parameters:
+  EnvironmentType:
+    Type: String
+    Default: dev
+    AllowedValues:
+        - dev
+        - staging
+        - prod
+      Description: Environment type (dev, staging or prod)
+
+Resources:
+  RDSInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceClass: db.t2.micro
+      Engine: MySQL
+      MasterUsername: Replace with admin  # your desired username
+      MasterUserPassword: password  # Replace with your password
+      AllocatedStorage: 20
+      DBName: AppDB
+      VPCSecurityGroups:
+        - Ref: RDSSecurityGroup
+      Tags:
+        - Key: EnvironmentType
+          Value: !Ref EnvironmentType

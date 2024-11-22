@@ -1,0 +1,16 @@
+Parameters:
+  EnvironmentType:
+    Type: String
+    Default: dev
+    AllowedValues:
+        - dev
+        - staging
+        - prod
+      Description: Environment type (dev, staging or prod)
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName:
+        Fn::Sub: ${EnvironmentType}-your-bucket-name

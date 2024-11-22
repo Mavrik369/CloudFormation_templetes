@@ -1,0 +1,23 @@
+Parameters:
+  EnvironmentType:
+    Type: String
+    Default   : Allowed dev
+Values:
+        - dev
+        - staging
+        - prod
+      Description: Environment type (dev, staging or prod)
+
+Resources:
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro  # Choose instance type as needed
+      KeyName: your-key-pair  # Replace with your key pair name
+      ImageId: ami-id  # Replace with the desired AMI ID
+      SecurityGroups:
+        - Ref: EC2SecurityGroup
+      Tags:
+        - Key: EnvironmentType
+          Value: !Ref EnvironmentType
+
